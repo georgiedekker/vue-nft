@@ -39,12 +39,13 @@ export default {
         lat: this.location.latitude,
         lng: this.location.longtitude,
       };
-      let cities = [{worldcity: 'somewhere',d:R}]
+      let cities = [{worldcity: 'somewhere',d:R}];
+      let topCities = [];
       let nearestCity = {};
       for (let i = 0; i < worldcities.length; i++) {
         let difflat =
-          query.lat - worldcities[i].lat * (Math.PI / 180) * (Math.PI / 180);
-        let difflon = query.lng - worldcities[i].lng * (Math.PI / 180);
+          (worldcities[i].lat * (Math.PI / 180)) - (query.lat * (Math.PI / 180));
+        let difflon = (query.lng - worldcities[i].lng) * (Math.PI / 180);
         let d =
           2 * R * Math.asin( Math.sqrt(
               Math.sin(difflat / 2) * Math.sin(difflat / 2) +
@@ -58,12 +59,15 @@ export default {
           if(d<R){
           if(Math.floor(d) < Math.floor(cities[0].d)){
             cities = [{worldcity: worldcities[i],d:d}]
-            console.log(cities+" "+d)
+            // cities.push({worldcity: worldcities[i],d:d})
+            console.log(cities[0].worldcity.city_ascii+" "+d)
+            topCities.push({worldcity:cities[0].worldcity, d:d})
           }}
         }
       }
 
       console.log(cities.length)
+      console.log(topCities)
       nearestCity = cities[0]
       console.log(nearestCity.worldcity.city_ascii)
     }
