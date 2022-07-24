@@ -5,7 +5,7 @@
         latitude {{ location.latitude }} longtitude {{ location.longtitude }}
       </p>
       <p>
-        heading {{ location.heading ? location.heading : "nowhere" }} with speed
+        heading {{ location.heading }} with speed
         {{ location.speed ? location.speed : "no speed" }}
       </p>
     </div>
@@ -21,17 +21,52 @@
 </template>
 
 <script>
+import worldcities from "@/assets/worldcities.json";
 export default {
   name: "Contracts",
   props: ["contracts", "userWalletId"],
   methods: {
     checkChat() {
       if (this.userWalletId) {
-        //       window.open(`https://chat.blockscan.com/index?a=${this.userWalletId.toString()}`,'_blank');
+        //       window.open(`https://chat.blockscan.com/index?a=${this.userWalletId.toString()}`,"_blank");
         window.open("https://chat.blockscan.com/connect-wallet", "_blank");
-        console.log('userWalletId found')
+        console.log("userWalletId found");
       }
     },
+    getNearbyCity() {
+      let R = 3958.8;
+      let query = {
+        lat: this.location.latitude,
+        lng: this.location.longtitude,
+      };
+      let cities = [{worldcity: 'somewhere',d:R}]
+      let nearestCity = {};
+      for (let i = 0; i < worldcities.length; i++) {
+        let difflat =
+          query.lat - worldcities[i].lat * (Math.PI / 180) * (Math.PI / 180);
+        let difflon = query.lng - worldcities[i].lng * (Math.PI / 180);
+        let d =
+          2 * R * Math.asin( Math.sqrt(
+              Math.sin(difflat / 2) * Math.sin(difflat / 2) +
+                Math.cos(query.lat) *
+                  Math.cos(worldcities[i].lat) *
+                  Math.sin(difflon / 2) *
+                  Math.sin(difflon / 2)
+            )
+          );
+        if (!isNaN(d)) {
+          if(d<R){
+          if(Math.floor(d) < Math.floor(cities[0].d)){
+            cities = [{worldcity: worldcities[i],d:d}]
+            console.log(cities+" "+d)
+          }}
+        }
+      }
+
+      console.log(cities.length)
+      nearestCity = cities[0]
+      console.log(nearestCity.worldcity.city_ascii)
+    }
   },
   //   computed(){contracts = this.getContracts()},
   data() {
@@ -40,6 +75,8 @@ export default {
       gettingLocation: false,
       errorStr: null,
       chat: null,
+      cities: null,
+      worldCities: null,
       //       contractsUrl: this.contracts,
     };
   },
@@ -61,7 +98,25 @@ export default {
           heading: pos.coords.heading,
           speed: pos.coords.speed,
         };
-        console.log(pos);
+        switch (this.location.heading) {
+          case this.location.heading < 90:
+            this.location.heading = "north";
+            break;
+          case this.location.heading >= 90 && this.location.heading < 180:
+            this.location.heading = "east";
+            break;
+          case this.location.heading >= 180 && this.location.heading < 270:
+            this.location.heading = "south";
+            break;
+          case this.location.heading >= 270:
+            this.location.heading = "west";
+            break;
+          default:
+            this.location.heading = "nowhere";
+            break;
+          // heading: pos.coords.heading},
+        }
+        this.getNearbyCity(pos);
       },
       (err) => {
         this.gettingLocation = false;
