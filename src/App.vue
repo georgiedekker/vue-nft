@@ -5,17 +5,28 @@
 
     <button @click="toggleButton">{{ buttonMessage }}</button>
     <br />
-
+    <Location />
+    <Map />
+    <br />
+    <div v-if="contracts">
     <Contracts :contracts="contracts" :userWalletId="userWalletId" />
+    <RegForm />
+  </div>
   </div>
 </template>
 
 <script>
 import Contracts from "@/components/Contracts.vue";
+import Location from "@/components/Location.vue";
+import Map from "@/components/Map.vue";
+import RegForm from "@/components/RegForm.vue";
 export default {
   name: "App",
   components: {
     Contracts,
+    Location,
+    RegForm,
+    Map
   },
   data() {
     return {
