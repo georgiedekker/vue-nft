@@ -25,6 +25,17 @@ export default {
   name: "Location",
   props: [],
   methods: {
+    // showLocation(pos) {
+    //   this.location = {
+    //         latitude: pos.coords.latitude,
+    //         longitude: pos.coords.longitude,
+    //         heading: pos.coords.heading,
+    //         speed: pos.coords.speed,
+    //       };
+    // },
+    // errorHandler(err) {
+    //   console.log(err.code);
+    // },
     getLocation() {
       if (!("geolocation" in navigator)) {
         this.errorStr = "Geolocation is not available.";
@@ -95,20 +106,16 @@ export default {
           );
         if (!isNaN(d)) {
           cities = [worldCities[i]];
-          cities[0].d = d.toFixed(2)
+          cities[0].d = d.toFixed(2);
           this.topCities.push(cities[0]);
         }
       }
-      console.log(this.topCities.length)
+      console.log(this.topCities.length);
       this.topCities = this.topCities
         .sort(this.sortDistance)
         .sort(this.sortDistance);
-      this.topCities = this.topCities.slice(0, 15);
-      //       this.topCities = this.topCities.sort(function(x,y){x.d - y.d; console.log(x.d+" "+y.d)})
-      //       console.log(cities.length);
-      //       console.log(this.topCities);
+      this.topCities = this.topCities.slice(0, 7);
       this.nearestCity = this.topCities[0];
-      //       console.log(this.nearestCity.worldCity.city_ascii);
     },
     sortDistance(a, b) {
       if (parseInt(a.d) < parseInt(b.d)) {
@@ -122,24 +129,37 @@ export default {
   },
   data() {
     return {
-      //       cities: [],
       nearestCity: null,
-      //       countryCities: [],
       topcities: [],
       gettingLocation: false,
       errorStr: null,
       location: null,
+      // geoLoc: null,
+      // watchID: null,
     };
   },
   created() {
     //do we support geolocation
   },
-  mounted: function () {
-    this.$nextTick(function () {
-      window.setInterval(() => {
-        this.getLocation();
-      }, 1000);
-    });
+  mounted() {
+    this.getLocation()
+    // if (navigator.geolocation) {
+    //   let options = { timeOut: 60000 };
+    //   this.geoLoc = navigator.geolocation;
+    //   this.WatchId = this.geoLoc.watchPosition(
+    //     this.showLocation,
+    //     this.erroHandler,
+    //     options
+    //   );
+    // }
+    // this.$nextTick(function () {
+    //   window.setInterval(() => {
+    //     this.getLocation();
+    //   }, 1000000);
+    // });
   },
+  beforeUnmount(){
+
+  }
 };
 </script>

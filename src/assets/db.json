@@ -1,0 +1,26 @@
+[
+              {
+                "id": "000001",
+                "name":"some event",
+                "description" :"some cool event",
+                "startDate": "08/01/2022",
+                "endDate": "08/01/2022",
+                "year": 2022,
+                "country": "Canada",
+                "city": "Hamilton",
+                "lat": 43.270144,
+                "lng": -79.7769728
+              },
+              {
+                            "id": "000002",
+                            "name":"some other event",
+                            "description" :"some other cool event",
+                            "startDate": "08/02/2022",
+                            "endDate": "08/02/2022",
+                            "year": 2022,
+                            "country": "Canada",
+                            "city": "Hamilton",
+                            "lat": 43.270144,
+                            "lng": -79.7769728
+                          }
+            ]
