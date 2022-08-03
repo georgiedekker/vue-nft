@@ -1,94 +1,99 @@
 <template>
   <div>
-    <img alt="Vue logo" src="@/assets/logo.png" />
-    <br />
+    <div class="homeGroup">
+      <div class="home-item">
+        <div class="first">
+          <img id="logo" alt="Vue logo" src="@/assets/logo.png" />
+          <br />
+          <br />
+          <!-- <login /> -->
+          <br />
+          <button v-if="userWalletId" @click="checkChat()">Chat</button>
+          <br />
+          <RegForm v-if="contracts" />
+          <br />
+          <button v-if="userWalletId" @click="submit()">Submit</button>
+          <br />
+        </div>
+      </div>
 
-    <button @click="toggleButton">{{ buttonMessage }}</button>
+      <div class="home-item" v-if="contracts">
+        <Contracts :contracts="contracts" :userWalletId="userWalletId" />
+      </div>
+    </div>
+
     <br />
-    <Location />
-    <Map />
-    <br />
-    <div v-if="contracts">
-    <Contracts :contracts="contracts" :userWalletId="userWalletId" />
-    <RegForm />
-  </div>
   </div>
 </template>
 
 <script>
 import Contracts from "@/components/Contracts.vue";
-import Location from "@/components/Location.vue";
-import Map from "@/components/Map.vue";
+// import Login from "@/components/Login.vue";
 import RegForm from "@/components/RegForm.vue";
 export default {
   name: "Home",
   components: {
     Contracts,
-    Location,
     RegForm,
-    Map
+    // Login,
   },
+  props:["userWalletId", "contracts"],
   data() {
-    return {
-      buttonMessage: "Login with MetaMask",
-      userWalletId: this.userWalletId,
-      contracts: this.contracts,
-    };
+    return {};
   },
   methods: {
-    async toggleButton() {
-      if (this.userWalletId == "" || this.userWalletId == undefined) {
-        this.loginWithMetaMask();
-      } else {
-        this.signOutOfMetaMask();
+    checkChat() {
+      if (this.userWalletId) {
+        //       window.open(`https://chat.blockscan.com/index?a=${this.userWalletId.toString()}`,"_blank");
+        window.open("https://chat.blockscan.com/connect-wallet", "_blank");
+        console.log("userWalletId found");
       }
     },
-
-    async loginWithMetaMask() {
-      const accounts = await window.ethereum
-        .request({ method: "eth_requestAccounts" })
-        .catch((e) => {
-          console.error(e.message);
-          return;
-        });
-      if (!accounts) {
-        return;
-      }
-      this.buttonMessage = "Sign out of MetaMask";
-      this.userWalletId = accounts[0];
-      let dataList = [];
-      this.userWalletId = "0xBe8994684D2a570a84c3AC28459bC83E7d80e3b9";
-      fetch(
-        `https://api.opensea.io/api/v1/collections?asset_owner=${this.userWalletId}&offset=0&limit=300`
-      ).then((response) =>
-        response.json().then((data) => {
-          for (let i = 0; i < data.length; i++) {
-            dataList.push(data[i].name);
-          }
-          this.contracts = dataList;
-        })
-      );
-    },
-    signOutOfMetaMask() {
-      this.userWalletId = "";
-      this.buttonMessage = "Login with MetaMask";
-      this.contracts = null;
+    submit() {
+      alert("submitted");
     },
   },
 };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 10px;
+.homeGroup {
+  display: flex;
+  flex-flow: row;
+  flex-basis: 33.3333%;
+  justify-content: space-evenly;
+  padding: 0;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
 }
-#app.img {
-  transform: rotate(360deg);
-  transition: transform 0.5s ease-in-out;
+.home-item {
+  width: 33.333%;
+  max-width: 20em;
+}
+.home-item-button {
+  display: inline-block;
+}
+.first {
+  clear: both;
+  display: flex;
+  flex-flow: column wrap;
+  float: left;
+  margin: 0px;
+}
+img#logo {
+  float: left;
+  display: block;
+  width: 100%;
+  filter: hue-rotate(45deg);
+  transition: all 6.5s;
+  transform: rotate(180deg);
+}
+img#logo:hover {
+  text-align: left;
+  filter: hue-rotate(180deg);
+  transition: all 6.5s;
+  transform: rotate(0deg);
 }
 </style>

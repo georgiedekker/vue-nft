@@ -1,29 +1,33 @@
 <template>
   <div>
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <br />
-
-    <router-view></router-view>
+    <nav>
+      <router-link :userWalletId="userWalletId" :contracts="contracts" to="/">Home</router-link> | 
+      <!-- :userWalletId="userWalletId" :contracts="contracts" -->
+      <router-link :userWalletId="userWalletId" :contracts="contracts" to="/map">Map</router-link> | 
+            <login />
+    </nav>
+    <router-view />
   </div>
 </template>
 
 <script>
 import Home from "@/views/Home.vue";
+import Map from "@/views/Map.vue";
+import Login from "@/components/Login.vue";
 export default {
   name: "App",
-  components: {
-    
-  },
-  views:{
-    Home
+  components: {Login},
+  views: {
+    Home,Map
   },
   data() {
     return {
-      
-    };
+      // userwalletId: this.userWalletId,
+      // contracts: this.contracts
+      };
   },
-  methods: {
-  }
+  props:["location", "userWalletId", "contracts"],
+  methods: {},
 };
 </script>
 
@@ -35,9 +39,5 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 10px;
-}
-#app.img {
-  transform: rotate(360deg);
-  transition: transform 0.5s ease-in-out;
 }
 </style>

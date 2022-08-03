@@ -1,11 +1,16 @@
 <template>
-<div></div>
+<div>
+<p>The location is {{location}}</p>
+
+</div>
+        
 </template>
 <script>
+
 // import {Loader} from "@googlemaps/js-api-loader"
 export default {
   name: "Map",
-  props: [],
+  props: ["location"],
   data() {
     return {
       // key: "AIzaSyBdf_c6O6u0Bu-6WffKoLXYTywdvdgVS_w",

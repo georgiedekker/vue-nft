@@ -12,11 +12,7 @@
       {{ index + 1 }} - {{ topCity.city_ascii }} {{ topCity.d }} miles away in
       {{ topCity.country }}
     </li>
-    <!-- </div> -->
   </div>
-  <!-- <button v-if="userWalletId" @click="checkChat()" :href="chat" target="_blank">Chat</button> -->
-
-  <!-- v-if="contracts" -->
 </template>
 
 <script>
