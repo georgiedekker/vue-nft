@@ -18,8 +18,8 @@
     </div>
 
     <br />
-  </div>
   <MapRender />
+  </div>
 </template>
 
 <script>
