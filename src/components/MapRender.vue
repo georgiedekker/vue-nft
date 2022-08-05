@@ -10,7 +10,7 @@
 import { store } from '@/store.js';
 export default {
   name: "Map",
-  props: ["location"],
+  // props: ["location"],
   data() {
     return {
       // key: "AIzaSyBdf_c6O6u0Bu-6WffKoLXYTywdvdgVS_w",

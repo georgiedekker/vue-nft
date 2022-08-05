@@ -5,8 +5,8 @@
       {{ store.location.longitude }}
     </p>
     <p>
-      heading {{ store.location.heading }} with speed
-      {{ store.location.speed ? store.location.speed : "no speed" }}
+      heading {{ store.location.heading }} with
+      {{ store.location.speed +"speed" ? store.location.speed : "no speed" }}
     </p>
     <!-- <div v-if="topCities"> -->
     <h3>Closest Cities</h3>
@@ -128,7 +128,7 @@ export function getLocation() {
       // errorStr: store.errorStr,
       // location: store.location,
       // }
-      console.log(store);
+      // console.log(store);
     return {
       store
       // getLocation: store.getLocation(),
