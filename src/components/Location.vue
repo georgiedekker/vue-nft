@@ -6,7 +6,7 @@
     </p>
     <p>
       heading {{ store.location.heading }} with
-      {{ store.location.speed +"speed" ? store.location.speed : "no speed" }}
+      {{ store.location.speed +"miles per hour" ? store.location.speed : "no speed" }}
     </p>
     <!-- <div v-if="topCities"> -->
     <h3>Closest Cities</h3>

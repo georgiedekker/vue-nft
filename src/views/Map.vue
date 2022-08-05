@@ -13,7 +13,6 @@
         <Location v-if="store.userWalletId" />
       </div>
       <div class="map">
-        
       </div>
     </div>
 

@@ -17,7 +17,9 @@ import Login from "@/components/Login.vue";
 import { store } from '@/store.js';
 export default {
   name: "App",
-  components: {Login},
+  components: {
+  Login
+  },
   views: {
     Home,Map
   },

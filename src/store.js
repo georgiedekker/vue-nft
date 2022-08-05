@@ -3,9 +3,9 @@ import { reactive } from 'vue'
 
 export const store = reactive({
   location: {},
-  userWalletId: "",
+  userWalletId: String,
   contracts: [],
-  country: "",
+  country: String,
   nearestCity: {},
   topCities: [],
 });

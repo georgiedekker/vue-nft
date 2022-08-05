@@ -18,7 +18,7 @@ export default {
   },
 //   methods: {
 //     initMap() {
-//       let key = process.env.APIKEY;
+//       let key = '';
 //       let url = `https://maps.googleapis.com/maps/api/js?key=${this.key}&callback=initMap`;
 //       let loader = new Loader({apiKey: key})
 //     },
