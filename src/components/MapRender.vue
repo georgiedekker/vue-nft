@@ -13,7 +13,6 @@ export default {
   // props: ["location"],
   data() {
     return {
-      // key: "AIzaSyBdf_c6O6u0Bu-6WffKoLXYTywdvdgVS_w",
       store
     };
   },
