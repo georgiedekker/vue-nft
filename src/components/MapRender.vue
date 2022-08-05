@@ -1,20 +1,20 @@
 <template>
 <div>
-<p>The location is {{location}}</p>
+<p>The location is {{store.nearestCity.city_ascii}}</p>
 
 </div>
         
 </template>
 <script>
 
-// import {Loader} from "@googlemaps/js-api-loader"
+import { store } from '@/store.js';
 export default {
   name: "Map",
   props: ["location"],
   data() {
     return {
       // key: "AIzaSyBdf_c6O6u0Bu-6WffKoLXYTywdvdgVS_w",
-      
+      store
     };
   },
 //   methods: {

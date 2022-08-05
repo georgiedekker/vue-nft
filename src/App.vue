@@ -1,9 +1,9 @@
 <template>
   <div>
     <nav>
-      <router-link :userWalletId="userWalletId" :contracts="contracts" to="/">Home</router-link> | 
+      <router-link to="/">Home</router-link> | 
       <!-- :userWalletId="userWalletId" :contracts="contracts" -->
-      <router-link :userWalletId="userWalletId" :contracts="contracts" to="/map">Map</router-link> | 
+      <router-link to="/map">Map</router-link> | 
             <login />
     </nav>
     <router-view />
@@ -14,6 +14,7 @@
 import Home from "@/views/Home.vue";
 import Map from "@/views/Map.vue";
 import Login from "@/components/Login.vue";
+import { store } from '@/store.js';
 export default {
   name: "App",
   components: {Login},
@@ -22,11 +23,12 @@ export default {
   },
   data() {
     return {
+      store
       // userwalletId: this.userWalletId,
       // contracts: this.contracts
       };
   },
-  props:["location", "userWalletId", "contracts"],
+  // props:["location", "userWalletId", "contracts"],
   methods: {},
 };
 </script>

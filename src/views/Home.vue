@@ -8,17 +8,17 @@
           <br />
           <!-- <login /> -->
           <br />
-          <button v-if="userWalletId" @click="checkChat()">Chat</button>
+          <button v-if="store.userWalletId" @click="checkChat()">Chat</button>
           <br />
-          <RegForm v-if="contracts" />
+          <RegForm v-if="store.contracts" />
           <br />
-          <button v-if="userWalletId" @click="submit()">Submit</button>
+          <button v-if="store.userWalletId" @click="submit()">Submit</button>
           <br />
         </div>
       </div>
 
-      <div class="home-item" v-if="contracts">
-        <Contracts :contracts="contracts" :userWalletId="userWalletId" />
+      <div class="home-item" v-if="store.contracts">
+        <Contracts />
       </div>
     </div>
 
@@ -30,6 +30,7 @@
 import Contracts from "@/components/Contracts.vue";
 // import Login from "@/components/Login.vue";
 import RegForm from "@/components/RegForm.vue";
+import { store } from '@/store.js';
 export default {
   name: "Home",
   components: {
@@ -37,14 +38,16 @@ export default {
     RegForm,
     // Login,
   },
-  props:["userWalletId", "contracts"],
+  // props:["userWalletId", "contracts"],
   data() {
-    return {};
+    return {
+      store
+    };
   },
   methods: {
     checkChat() {
       if (this.userWalletId) {
-        //       window.open(`https://chat.blockscan.com/index?a=${this.userWalletId.toString()}`,"_blank");
+        //       window.open(`https://chat.blockscan.com/index?a=${this.store.userWalletId.toString()}`,"_blank");
         window.open("https://chat.blockscan.com/connect-wallet", "_blank");
         console.log("userWalletId found");
       }

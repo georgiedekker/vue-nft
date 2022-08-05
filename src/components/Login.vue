@@ -5,6 +5,8 @@
 
           </template>
 <script>
+  import { store } from '@/store.js';
+  import { getLocation } from '@/components/Location.vue';
 export default {
   name: "Login",
 data() {
@@ -12,6 +14,7 @@ data() {
       buttonMessage: "Login with MetaMask",
       userWalletId: this.userWalletId,
       contracts: this.contracts,
+      store
     };
   },
   // props:["userWalletId"],
@@ -19,8 +22,11 @@ data() {
     async toggleButton() {
       if (this.userWalletId == "" || this.userWalletId == undefined) {
         this.loginWithMetaMask();
+        getLocation()
+        // this.$router.push('/map');
       } else {
         this.signOutOfMetaMask();
+        // this.$router.push('/');
       }
     },
     async loginWithMetaMask() {
@@ -35,6 +41,7 @@ data() {
       }
       this.buttonMessage = "Sign out of MetaMask";
       this.userWalletId = accounts[0];
+      this.store.userWalletId = this.userWalletId;
       let dataList = [];
 //       this.userWalletId = "0xBe8994684D2a570a84c3AC28459bC83E7d80e3b9";
       fetch(
@@ -45,6 +52,7 @@ data() {
             dataList.push(data[i].name);
           }
           this.contracts = dataList;
+          this.store.contracts = this.contracts;
         })
       );
     },
@@ -52,6 +60,8 @@ data() {
       this.userWalletId = "";
       this.buttonMessage = "Login with MetaMask";
       this.contracts = null;
+      this.store.userWalletId = this.userWalletId;
+      this.store.contracts = this.contracts;
     },
   },
 };
