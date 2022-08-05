@@ -31,6 +31,7 @@ import Contracts from "@/components/Contracts.vue";
 // import Login from "@/components/Login.vue";
 import RegForm from "@/components/RegForm.vue";
 import { store } from '@/store.js';
+import { getLocation } from "@/components/Location.vue";
 export default {
   name: "Home",
   components: {
@@ -41,7 +42,8 @@ export default {
   // props:["userWalletId", "contracts"],
   data() {
     return {
-      store
+      store,
+      getLocation
     };
   },
   methods: {

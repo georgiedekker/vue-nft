@@ -9,7 +9,7 @@
 
 <script>
 // import worldcities from "@/assets/worldcities.json";
-
+import { store } from '@/store.js';
 export default {
   name: "Contracts",
   // props: ["contracts", "userWalletId"],
@@ -19,8 +19,7 @@ export default {
   //   computed(){contracts = this.getContracts()},
   data() {
     return {
-      location: null,
-      chat: null,
+      store
     };
   },
   created() {
