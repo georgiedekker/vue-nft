@@ -8,4 +8,4 @@ export const store = reactive({
   country: "",
   nearestCity: {},
   topCities: [],
-})
+});
