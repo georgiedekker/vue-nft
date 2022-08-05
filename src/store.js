@@ -2,10 +2,10 @@
 import { reactive } from 'vue'
 
 export const store = reactive({
-  location,
-  userWalletId,
-  contracts,
+  location: {},
+  userWalletId: String,
+  contracts: [],
   country: String,
-  nearestCity,
-  topCities,
+  nearestCity: {},
+  topCities: [],
 });
