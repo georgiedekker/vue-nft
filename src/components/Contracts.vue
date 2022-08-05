@@ -1,7 +1,7 @@
 <template>
-  <div v-if="contracts">
+  <div v-if="store.contracts">
     <h3>Here are your contracts</h3>
-    <li v-for="(contract, index) in contracts" :key="contract">
+    <li v-for="(contract, index) in store.contracts" :key="contract">
       {{ index + 1 }} - {{ contract }}
     </li>
   </div>
@@ -12,7 +12,7 @@
 
 export default {
   name: "Contracts",
-  props: ["contracts", "userWalletId"],
+  // props: ["contracts", "userWalletId"],
   methods: {
     
   },
