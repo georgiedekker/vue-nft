@@ -23,14 +23,14 @@
 
 <script>
 import MapRender from "@/components/MapRender.vue";
-// import Location from "@/components/Location.vue";
+import Location from "@/components/Location.vue";
 import { store } from '@/store.js';
 export default {
   name: "Map",
   // props:["userWalletId", "contracts", "location"],
   components: {
     MapRender,
-    // Location,
+    Location,
   },
   data() {
     return {
