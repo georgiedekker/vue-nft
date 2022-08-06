@@ -17,7 +17,7 @@
     </div>
 
     <br />
-  <MapRender />
+  <MapRender v-if="store.nearestCity"/>
   </div>
 </template>
 

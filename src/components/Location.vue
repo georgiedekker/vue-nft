@@ -1,5 +1,5 @@
 <template>
-  <div v-if="store.location">
+  <div v-if="store.location.latitude">
     <p>
       latitude {{ store.location.latitude }} longitude
       {{ store.location.longitude }}
@@ -77,6 +77,7 @@ export default {
 
 
 export function getLocation() {
+  if(store.location){return store.location}
   store.gettingLocation = true;
   store.errorStr = null;
   store.location = {};
@@ -115,29 +116,21 @@ export function getLocation() {
               break;
           }
           getNearbyCity(pos);
+          return store.location
         },
         (err) => {
           store.gettingLocation = false;
           store.errorStr = err.message;
         }
       );
-      // store = {
-      // nearestCity: store.nearestCity,
-      // topcities: store.topCities,
-      // gettingLocation: store.gettingLocation,
-      // errorStr: store.errorStr,
-      // location: store.location,
-      // }
-      // console.log(store);
     return {
       store
-      // getLocation: store.getLocation(),
-      // watchID: null,
     };
     
 }
 
 export function getNearbyCity(pos) {
+      if(store.nearestCity){return store.nearestCity}
               let R = 3958.8;
               let query = {
                 lat: pos.coords.latitude,
@@ -145,7 +138,6 @@ export function getNearbyCity(pos) {
               };
               let cities = [];
               let topCities = [];
-              let nearestCity = {};
               for (let i = 0; i < worldCities.length; i++) {
                 let difflat = Math.abs(
                   worldCities[i].lat * (Math.PI / 180) - query.lat * (Math.PI / 180)
@@ -176,8 +168,7 @@ export function getNearbyCity(pos) {
                 .sort(sortDistance);
               topCities = topCities.slice(0, 7);
               store.topCities = topCities;
-              nearestCity = topCities[0];
-              store.nearestCity = nearestCity;
+              store.nearestCity = topCities[0];
             }
             export function sortDistance(a, b) {
               if (parseInt(a.d) < parseInt(b.d)) {

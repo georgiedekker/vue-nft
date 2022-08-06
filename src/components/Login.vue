@@ -1,30 +1,31 @@
 <template>
 <button class="home-item-button" @click="toggleButton">
-            {{ buttonMessage }}
+            {{ store.buttonMessage }}
           </button>
 
           </template>
 <script>
-  import { store } from '@/store.js';
+  import { store, initStore } from '@/store.js';
   import { getLocation } from '@/components/Location.vue';
 export default {
   name: "Login",
 data() {
     return {
-      buttonMessage: "Login with MetaMask",
-      userWalletId: this.userWalletId,
-      contracts: this.contracts,
+      buttonMessage: store.buttonMessage?store.buttonMessage:"Login with MetaMask",
+      userWalletId: store.userWalletId?store.userWalletId:this.userWalletId,
+      contracts: store.contracts?store.contracts:this.contracts,
       store
     };
   },
   // props:["userWalletId"],
   methods: {
     async toggleButton() {
-      if (this.userWalletId == "" || this.userWalletId == undefined) {
-        this.loginWithMetaMask();
+      if (store.userWalletId == "" || store.userWalletId == undefined) {
         getLocation()
+        this.loginWithMetaMask();
         // this.$router.push('/map');
       } else {
+        store.buttonMessage = "Sign out of MetaMask";
         this.signOutOfMetaMask();
         // this.$router.push('/');
       }
@@ -39,29 +40,29 @@ data() {
       if (!accounts) {
         return;
       }
-      this.buttonMessage = "Sign out of MetaMask";
-      this.userWalletId = accounts[0];
-      this.store.userWalletId = this.userWalletId;
+      store.buttonMessage = "Sign out of MetaMask";
+      store.userWalletId = accounts[0];
       let dataList = [];
 //       this.userWalletId = "0xBe8994684D2a570a84c3AC28459bC83E7d80e3b9";
       fetch(
-        `https://api.opensea.io/api/v1/collections?asset_owner=${this.userWalletId}&offset=0&limit=300`
+        `https://api.opensea.io/api/v1/collections?asset_owner=${store.userWalletId}&offset=0&limit=300`
       ).then((response) =>
         response.json().then((data) => {
           for (let i = 0; i < data.length; i++) {
             dataList.push(data[i].name);
           }
-          this.contracts = dataList;
-          this.store.contracts = this.contracts;
+          store.contracts = dataList;
         })
       );
     },
     signOutOfMetaMask() {
-      this.userWalletId = "";
-      this.buttonMessage = "Login with MetaMask";
-      this.contracts = null;
-      this.store.userWalletId = this.userWalletId;
-      this.store.contracts = this.contracts;
+      store.userWalletId = null;
+      store.buttonMessage = "Login with MetaMask";
+      store.contracts = null;
+      store.location = null;
+      initStore.location = null;
+      initStore.contracts = null;
+      initStore.userWalletId = null;
     },
   },
 };
