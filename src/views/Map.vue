@@ -38,6 +38,9 @@ export default {
     };
   },
   methods: {
+  created(){
+  if(localStorage.getItem('buttonMessage')=="Sign out of MetaMask"){store.buttonMessage = "Sign out of MetaMask";}
+  }
   },
 };
 </script>

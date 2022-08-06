@@ -46,24 +46,21 @@ export default {
       getLocation
     };
   },
-  watch:{
-    store: {
-      handler(newValue, oldValue) {
-      console.log('newValue: '+JSON.stringify(newValue))
-      localStorage.setItem('store', JSON.stringify(newValue)); 
-      oldValue = JSON.parse(localStorage.getItem('store'));
-      console.log('oldValue: '+JSON.stringify(oldValue))
-
-      for(let item in store){
-        console.log(item)
-      }
-        // Note: `newValue` will be equal to `oldValue` here
-        // on nested mutations as long as the object itself
-        // hasn't been replaced.
-      },
-      deep: true
-    }
-  },
+  // watch:{
+  //   store: {
+  //     handler(newValue, oldValue) {
+  //     console.log('oldValue: '+JSON.stringify(oldValue))
+  //     // if(newValue!=oldValue){
+  //     let item = {};
+  //     
+  //     console.log('store mutation: '+item.name+' '+item.value)
+  //       localStorage.setItem(item.name, JSON.stringify(item.value))
+  //     }
+  //     localStorage.setItem('store', JSON.stringify(newValue))
+  //   }
+  // },
+  //     deep: true,
+  // },
   methods: {
     checkChat() {
       if (this.userWalletId) {
@@ -76,13 +73,8 @@ export default {
       alert("submitted");
     },
   },
-  mounted(){
-  // if(localStorage.latitude!=undefined){
-  // store.location = localStorage.location}
-  // if(store.location.latitude!=undefined){
-  // localStorage.location = store.location
-  // alert(localStorage.location.latitude)xx
-  // console.log(JSON. stringify(localStorage.location))}
+  created(){
+    if(localStorage.getItem('buttonMessage')=="Sign out of MetaMask"){store.buttonMessage = "Sign out of MetaMask";}
   }
 };
 </script>

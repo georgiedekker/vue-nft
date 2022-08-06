@@ -42,6 +42,7 @@ data() {
       }
       store.buttonMessage = "Sign out of MetaMask";
       store.userWalletId = accounts[0];
+      console.log(JSON.stringify(accounts))
       let dataList = [];
 //       this.userWalletId = "0xBe8994684D2a570a84c3AC28459bC83E7d80e3b9";
       fetch(
@@ -54,12 +55,19 @@ data() {
           store.contracts = dataList;
         })
       );
+      for(let i=0;i<Object.keys(store).length;i++){
+        if(Object.values(store)[i]!=null){
+          localStorage.setItem(Object.keys(store)[i], Object.values(store)[i])
+        }
+      }
     },
     signOutOfMetaMask() {
+      localStorage.clear()
       store.userWalletId = null;
       store.buttonMessage = "Login with MetaMask";
       store.contracts = null;
       store.location = null;
+      initStore.buttonMessage = "Login with MetaMask";
       initStore.location = null;
       initStore.contracts = null;
       initStore.userWalletId = null;

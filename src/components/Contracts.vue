@@ -8,15 +8,12 @@
 </template>
 
 <script>
-// import worldcities from "@/assets/worldcities.json";
 import { store } from '@/store.js';
 export default {
   name: "Contracts",
-  // props: ["contracts", "userWalletId"],
   methods: {
     
   },
-  //   computed(){contracts = this.getContracts()},
   data() {
     return {
       store

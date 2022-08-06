@@ -31,7 +31,11 @@ export default {
       };
   },
   // props:["location", "userWalletId", "contracts"],
-  methods: {},
+  methods: {
+  mounted(){
+  
+  }
+  },
 };
 </script>
 

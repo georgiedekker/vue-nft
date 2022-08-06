@@ -1,7 +1,8 @@
 // store.js
 import { reactive } from 'vue'
-
-export const initStore = reactive({})
+let storeInit = {buttonMessage:"Login with MetaMask"}
+// localStorage.setItem('store',JSON.stringify(storeInit))
+export const initStore = reactive({storeInit})
 if(localStorage.getItem('store')){
 initStore.buttonMessage = JSON.parse(localStorage.getItem('store')).buttonMessage?JSON.parse(localStorage.getItem('store')).buttonMessage:"Login with MetaMask";
 initStore.location = JSON.parse(localStorage.getItem('store')).location?JSON.parse(localStorage.getItem('store')).location:null;
@@ -25,12 +26,3 @@ export const store = reactive(
   topCities: initStore.topCities,
 }
 );
-
-
-// export function storeLocal(){
-// for(var item in store){
-//   console.log(item)
-// }
-// }
-// export function removeLocal(){
-// }
