@@ -5,7 +5,7 @@
 
           </template>
 <script>
-  import { store, initStore } from '@/store.js';
+  import { store, updateLocalStorage } from '@/store.js';
   import { getLocation } from '@/components/Location.vue';
 export default {
   name: "Login",
@@ -42,9 +42,9 @@ data() {
       }
       store.buttonMessage = "Sign out of MetaMask";
       store.userWalletId = accounts[0];
-      console.log(JSON.stringify(accounts))
+      // console.log(JSON.stringify(accounts))
       let dataList = [];
-//       this.userWalletId = "0xBe8994684D2a570a84c3AC28459bC83E7d80e3b9";
+      // store.userWalletId = "0xBe8994684D2a570a84c3AC28459bC83E7d80e3b9";
       fetch(
         `https://api.opensea.io/api/v1/collections?asset_owner=${store.userWalletId}&offset=0&limit=300`
       ).then((response) =>
@@ -53,13 +53,9 @@ data() {
             dataList.push(data[i].name);
           }
           store.contracts = dataList;
+      updateLocalStorage()
         })
       );
-      for(let i=0;i<Object.keys(store).length;i++){
-        if(Object.values(store)[i]!=null){
-          localStorage.setItem(Object.keys(store)[i], Object.values(store)[i])
-        }
-      }
     },
     signOutOfMetaMask() {
       localStorage.clear()
@@ -67,10 +63,14 @@ data() {
       store.buttonMessage = "Login with MetaMask";
       store.contracts = null;
       store.location = null;
-      initStore.buttonMessage = "Login with MetaMask";
-      initStore.location = null;
-      initStore.contracts = null;
-      initStore.userWalletId = null;
+      store.nearestCity = null;
+      store.topCities = null;
+      store.gettingLocation = true;
+      // initStore.buttonMessage = "Login with MetaMask";
+      // initStore.location = null;
+      // initStore.contracts = null;
+      // initStore.userWalletId = null;
+      // updateLocalStorage()
     },
   },
 };

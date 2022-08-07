@@ -73,9 +73,12 @@ export default {
       alert("submitted");
     },
   },
-  created(){
-    if(localStorage.getItem('buttonMessage')=="Sign out of MetaMask"){store.buttonMessage = "Sign out of MetaMask";}
-  }
+  // onBeforeMount(){
+  //   if(localStorage.getItem('buttonMessage')=="Sign out of MetaMask"){store.buttonMessage = "Sign out of MetaMask";}
+  // },
+  // updated(){
+  // updateLocalStorage()
+  // },
 };
 </script>
 

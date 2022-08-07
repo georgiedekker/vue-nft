@@ -8,18 +8,18 @@
 </template>
 
 <script>
-import { store } from '@/store.js';
+import { store, updateLocalStorage } from '@/store.js';
 export default {
   name: "Contracts",
   methods: {
-    
+    onUpdated(){
+      updateLocalStorage()
+    }
   },
   data() {
     return {
       store
     };
   },
-  created() {
-},
 }
 </script>

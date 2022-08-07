@@ -14,7 +14,7 @@
 import Home from "@/views/Home.vue";
 import Map from "@/views/Map.vue";
 import Login from "@/components/Login.vue";
-import { store } from '@/store.js';
+import { store, updateLocalStorage } from '@/store.js';
 export default {
   name: "App",
   components: {
@@ -32,10 +32,13 @@ export default {
   },
   // props:["location", "userWalletId", "contracts"],
   methods: {
-  mounted(){
-  
+  onBeforeMount(){
+    if(localStorage.getItem('buttonMessage')=="Sign out of MetaMask"){store.buttonMessage = "Sign out of MetaMask";}
   }
   },
+  onUpdated(){
+  updateLocalStorage()
+  }
 };
 </script>
 

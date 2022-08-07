@@ -20,7 +20,7 @@
 
 <script>
 import worldCities from "@/assets/worldcities.json";
-import { store } from '@/store.js';
+import { store, updateLocalStorage } from '@/store.js';
 export default {
   name: "Location",
   props: [],
@@ -70,14 +70,14 @@ export default {
     // });
   },
   beforeUnmount(){
-
+    updateLocalStorage()
   }
 }
 }
 
 
 export function getLocation() {
-  if(store.location){return store.location}
+  if(store.location){return store}
   store.gettingLocation = true;
   store.errorStr = null;
   store.location = {};
@@ -130,7 +130,7 @@ export function getLocation() {
 }
 
 export function getNearbyCity(pos) {
-      if(store.nearestCity){return store.nearestCity}
+      if(store.nearestCity){return store}
               let R = 3958.8;
               let query = {
                 lat: pos.coords.latitude,
@@ -169,6 +169,7 @@ export function getNearbyCity(pos) {
               topCities = topCities.slice(0, 7);
               store.topCities = topCities;
               store.nearestCity = topCities[0];
+              store.country = topCities[0].country;
             }
             export function sortDistance(a, b) {
               if (parseInt(a.d) < parseInt(b.d)) {

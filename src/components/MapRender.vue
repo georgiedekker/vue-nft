@@ -1,6 +1,6 @@
 <template>
 <div>
-<p v-if="store.userWalletId">The location is {{ store.nearestCity.city_ascii }}</p>
+<p v-if="store.nearestCity">The location is {{ store.nearestCity.city_ascii }}</p>
 
 </div>
         
