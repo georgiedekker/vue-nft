@@ -76,7 +76,7 @@ export default {
 }
 
 
-export function getLocation() {
+export async function getLocation() {
   if(store.location){return store}
   store.gettingLocation = true;
   store.errorStr = null;
@@ -116,21 +116,23 @@ export function getLocation() {
               break;
           }
           getNearbyCity(pos);
-          return store.location
+          // updateLocalStorage()
+          // return store
         },
         (err) => {
           store.gettingLocation = false;
           store.errorStr = err.message;
         }
       );
-    return {
-      store
-    };
+      updateLocalStorage()
+    // return 
+    //   store
+    ;
     
 }
 
-export function getNearbyCity(pos) {
-      if(store.nearestCity){return store}
+export async function getNearbyCity(pos) {
+      if(store.nearestCity!=null){return store}
               let R = 3958.8;
               let query = {
                 lat: pos.coords.latitude,
@@ -170,6 +172,10 @@ export function getNearbyCity(pos) {
               store.topCities = topCities;
               store.nearestCity = topCities[0];
               store.country = topCities[0].country;
+              updateLocalStorage()
+              updateLocalStorage()
+              // localStorage.setItem('topCities',JSON.stringify(store.topCities))
+              // return store
             }
             export function sortDistance(a, b) {
               if (parseInt(a.d) < parseInt(b.d)) {

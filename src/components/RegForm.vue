@@ -1,24 +1,26 @@
 <template>
-  <p>Message is: {{ message }}</p>
-  <input v-model.lazy.trim="message" placeholder="edit me" />
+  <div>
+    <p>Message is: {{ message }}</p>
+    <input v-model.lazy.trim="message" placeholder="edit me" />
 
-  <span>Multiline message is:</span>
-  <p style="white-space: pre-line">{{ longMessage }}</p>
-  <textarea
-    v-model.lazy.trim="longMessage"
-    placeholder="add multiple lines"
-  ></textarea>
+    <span>Multiline message is:</span>
+    <p style="white-space: pre-line">{{ longMessage }}</p>
+    <textarea
+      v-model.lazy.trim="longMessage"
+      placeholder="add multiple lines"
+    ></textarea>
 
-  <input type="checkbox" id="checkbox" v-model="checked" />
-  <label for="checkbox">{{ checked }}</label>
+    <input type="checkbox" id="checkbox" v-model="checked" />
+    <label for="checkbox">{{ checked }}</label>
 
-  <div>Picked: {{ picked }}</div>
+    <div>Picked: {{ picked }}</div>
 
-  <input type="radio" id="one" value="One" v-model="picked" />
-  <label for="one">One</label>
+    <input type="radio" id="one" value="One" v-model="picked" />
+    <label for="one">One</label>
 
-  <input type="radio" id="two" value="Two" v-model="picked" />
-  <label for="two">Two</label>
+    <input type="radio" id="two" value="Two" v-model="picked" />
+    <label for="two">Two</label>
+  </div>
 </template>
 <script>
 export default {

@@ -10,15 +10,15 @@
           <br />
           <button v-if="store.userWalletId" @click="checkChat()">Chat</button>
           <br />
-          <RegForm v-if="store.contracts" />
+          <RegForm v-if="store.collections" />
           <br />
           <button v-if="store.userWalletId" @click="submit()">Submit</button>
           <br />
         </div>
       </div>
 
-      <div class="home-item" v-if="store.contracts">
-        <Contracts />
+      <div class="home-item" v-if="store.collections">
+        <Collections />
       </div>
     </div>
 
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import Contracts from "@/components/Contracts.vue";
+import Collections from "@/components/Collections.vue";
 // import Login from "@/components/Login.vue";
 import RegForm from "@/components/RegForm.vue";
 import { store } from '@/store.js';
@@ -35,7 +35,7 @@ import { getLocation } from "@/components/Location.vue";
 export default {
   name: "Home",
   components: {
-    Contracts,
+    Collections,
     RegForm,
     // Login,
   },
@@ -83,43 +83,4 @@ export default {
 </script>
 
 <style>
-.homeGroup {
-  display: flex;
-  flex-flow: row;
-  flex-basis: 33.3333%;
-  justify-content: space-evenly;
-  padding: 0;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
-}
-.home-item {
-  width: 33.333%;
-  max-width: 20em;
-}
-.home-item-button {
-  display: inline-block;
-}
-.first {
-  clear: both;
-  display: flex;
-  flex-flow: column wrap;
-  float: left;
-  margin: 0px;
-}
-img#logo {
-  float: left;
-  display: block;
-  width: 100%;
-  filter: hue-rotate(45deg);
-  transition: all 6.5s;
-  transform: rotate(180deg);
-}
-img#logo:hover {
-  text-align: left;
-  filter: hue-rotate(180deg);
-  transition: all 6.5s;
-  transform: rotate(0deg);
-}
 </style>

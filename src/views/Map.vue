@@ -9,7 +9,7 @@
         </div>
       </div>
 
-      <div class="home-item" v-if="store.contracts">
+      <div class="home-item" v-if="store.collections">
         <Location v-if="store.userWalletId" />
       </div>
       <div class="map">
